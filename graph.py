@@ -46,9 +46,9 @@ if __name__ == '__main__':
 
     while True:
 
-        Date = sys.stdin.readline()
+        Date = sys.stdin.readline().rstrip()
 
-        if Date == 'quit\n':
+        if Date == 'quit':
             break
 
         dataframe1 = pd.read_csv( Date+'.csv' )

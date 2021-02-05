@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 print( "Please insert the file name." )
-Date = sys.stdin.readline()
+Date = sys.stdin.readline().rstrip()
 
 
 dataframe1 = pd.read_csv( Date+".csv" )
