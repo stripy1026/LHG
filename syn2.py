@@ -51,41 +51,24 @@ def Injects_current_to_random( node_grid, size, amount ):
 
 
 
-def Synaptic_dynamics( temp_grid, node_grid, edge_grid, avalanche_grid, fraction ):
+def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
-    changed = True
     avalanche_count = 0
 
-    while changed:
-        changed = False
+    for i, key in enumerate( node_grid ):
 
-        for i, key in enumerate( node_grid ):
+        if node_grid[ key ] > 1:
+            print( round( node_grid[ key ], 2 ) )
+            node_grid[ key ] -= 1
 
-            if node_grid[ key ] > 1:
-                node_grid[ key ] -= 1
-
-                avalanche_grid[ key ] += 1
-               
-                neighbor_count = len( G[key] )
-
-                for i, nbnode in enumerate( G[key] ):
-
-                    try:
-                        temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
-                        edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
-
-                    except KeyError:
-                        temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( nbnode, key )]
-                        edge_grid[( nbnode, key )] -= fraction*edge_grid[( nbnode, key )]
-
-                changed = True
-
-    for i, key in enumerate( avalanche_grid ):
-
-        if avalanche_grid[ key ] > 0:
-            print( avalanche_grid[ key ], end=' ' )
             avalanche_count += 1
-            avalanche_grid[ key ] = 0
+               
+            neighbor_count = len( G[key] )
+
+            for i, nbnode in enumerate( G[key] ):
+
+                temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
+                edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
 
     for i, key in enumerate( node_grid ):
 
@@ -112,7 +95,7 @@ if __name__ == '__main__':
 
     # Plot graph
     #G = nx.grid_2d_graph( 10, 10 )
-    G = nx.complete_graph( 300 )
+    G = nx.complete_graph( 300, nx.DiGraph() )
 
     # This graph G be used to be a framework of the neuronal network.
     # I will use the attributes dictionary to simulate synaptic dynamics, while graph G remains still
@@ -135,8 +118,6 @@ if __name__ == '__main__':
     A = Make_neuron_attributes_dict()
     B = Make_synapse_attributes_dict( alpha, fraction )
     C = Make_neuron_attributes_dict()
-    D = Make_neuron_attributes_dict()
-
 
 
     Avalanche_Datalist = []
@@ -154,7 +135,7 @@ if __name__ == '__main__':
 
         Injects_current_to_random( A, node_size, external_current )
 
-        avalanche_count = Synaptic_dynamics( C, A, B, D, fraction )
+        avalanche_count = Synaptic_dynamics( C, A, B, fraction )
         Avalanche_Datalist.append( avalanche_count )
 
         if avalanche_count:
