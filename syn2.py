@@ -54,26 +54,34 @@ def Injects_current_to_random( node_grid, size, amount ):
 def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
     avalanche_count = 0
+    changed = True
+    cl = [False]*300
 
-    for i, key in enumerate( node_grid ):
+    while changed:
+        changed = False
 
-        if node_grid[ key ] > 1:
-            print( round( node_grid[ key ], 2 ) )
-            node_grid[ key ] -= 1
+        for i, key in enumerate( node_grid ):
 
-            avalanche_count += 1
+            if node_grid[ key ] > 1:
+                changed = True
+                print( round( node_grid[ key ], 2 ), end=' ' )
+                node_grid[ key ] -= 1
+
+                if cl[ key ] == False:
+                    cl[ key ] = True
+                    avalanche_count += 1
                
-            neighbor_count = len( G[key] )
+                neighbor_count = len( G[key] )
 
-            for i, nbnode in enumerate( G[key] ):
+                for i, nbnode in enumerate( G[key] ):
 
-                temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
-                edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
+                    temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
+                    edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
 
-    for i, key in enumerate( node_grid ):
+        for i, key in enumerate( node_grid ):
 
-        node_grid[ key ] += temp_grid[ key ]
-        temp_grid[ key ] = 0
+            node_grid[ key ] += temp_grid[ key ]
+            temp_grid[ key ] = 0
 
 
     return avalanche_count
@@ -106,7 +114,7 @@ if __name__ == '__main__':
 
     node_size = 300
     alpha = 1.4
-    v = 10
+    v = 1
     fraction = 0.2
     external_current = 0.025
 
@@ -152,9 +160,7 @@ if __name__ == '__main__':
             if i == 0:
                 one_neuro += B[key]
 
-        div = 0
-        for i in range( node_size ):
-            div += i
+        div = node_size*(node_size - 1)
         neuro_list.append( Total_neuro/div )
         neuros_list.append( one_neuro )
 
