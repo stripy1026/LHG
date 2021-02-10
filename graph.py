@@ -54,6 +54,7 @@ if __name__ == '__main__':
         dataframe1 = pd.read_csv( Date+'.csv' )
 
         Avalanche_size_distribution_plot( dataframe1['AC'], dataframe1['a'][1], Date )
+        print( "done" )
 
 
     plt.show()

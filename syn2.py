@@ -11,10 +11,10 @@ from tqdm import tqdm
 
 
 
-def Make_neuron_attributes_dict():
+def Make_neuron_attributes_dict( init_value ):
 
     key = G.nodes
-    val = [0]*len( G.nodes )
+    val = [init_value]*len( G.nodes )
 
     node_attributes_dictionary = dict( zip( key, val ) )
 
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     node_size = 300
     alpha = 1.4
-    v = 1
+    v = 10
     fraction = 0.2
     external_current = 0.025
 
@@ -123,9 +123,9 @@ if __name__ == '__main__':
     # Simulation
 
 
-    A = Make_neuron_attributes_dict()
+    A = Make_neuron_attributes_dict(0.9)
     B = Make_synapse_attributes_dict( alpha, fraction )
-    C = Make_neuron_attributes_dict()
+    C = Make_neuron_attributes_dict(0)
 
 
     Avalanche_Datalist = []
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     neuros_list = []
 
 #    for i in tqdm( range( 1000 ), desc = 'Avalanche process...' ):
-    while Avalanche_done_count < 1000:
+    while Avalanche_done_count < 10000:
         timescale += 1
         timescale_list.append( timescale )
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
         if avalanche_count:
             Avalanche_done_count += 1
             print()
-            print( 'Avalanche count = ', Avalanche_done_count, '/1000' )
+            print( 'Avalanche count = ', Avalanche_done_count, '/10000' )
 
         Total_neuro = 0
         one_neuro = 0
