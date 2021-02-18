@@ -55,7 +55,7 @@ def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
     avalanche_count = 0
     changed = True
-    cl = [False]*300
+    cl = [False]*len( node_grid )
 
     while changed:
         changed = False
@@ -64,7 +64,7 @@ def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
             if node_grid[ key ] > 1:
                 changed = True
-                print( round( node_grid[ key ], 2 ), end=' ' )
+#                print( round( node_grid[ key ], 2 ), end=' ' )
                 node_grid[ key ] -= 1
 
                 if cl[ key ] == False:
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     # Plot graph
     #G = nx.grid_2d_graph( 10, 10 )
-    G = nx.complete_graph( 300, nx.DiGraph() )
+    G = nx.complete_graph( 1000, nx.DiGraph() )
 
     # This graph G be used to be a framework of the neuronal network.
     # I will use the attributes dictionary to simulate synaptic dynamics, while graph G remains still
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     # Set Parameters
 
-    node_size = 300
+    node_size = 1000
     alpha = 1.4
     v = 10
     fraction = 0.2
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     neuros_list = []
 
 #    for i in tqdm( range( 1000 ), desc = 'Avalanche process...' ):
-    while Avalanche_done_count < 10000:
+    while Avalanche_done_count < 100:
         timescale += 1
         timescale_list.append( timescale )
 
@@ -148,8 +148,8 @@ if __name__ == '__main__':
 
         if avalanche_count:
             Avalanche_done_count += 1
-            print()
-            print( 'Avalanche count = ', Avalanche_done_count, '/10000' )
+            print( "Size : %d", avalanche_count )
+            print( 'Avalanche count = ', Avalanche_done_count, '/100' )
 
         Total_neuro = 0
         one_neuro = 0
