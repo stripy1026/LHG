@@ -101,24 +101,26 @@ def Recover_neurotransmitter( alpha, v, fraction, connection_strength, size ):
 
 if __name__ == '__main__':
 
-    # Plot graph
-    #G = nx.grid_2d_graph( 10, 10 )
-    G = nx.complete_graph( 1000, nx.DiGraph() )
-
-    # This graph G be used to be a framework of the neuronal network.
-    # I will use the attributes dictionary to simulate synaptic dynamics, while graph G remains still
 
     #==========================================================================
 
     # Set Parameters
 
-    node_size = 1000
+    node_size = 300
     alpha = 1.4
     v = 10
     fraction = 0.2
     external_current = 0.025
 
     #==========================================================================
+
+    # Plot graph
+    #G = nx.grid_2d_graph( 10, 10 )
+    G = nx.complete_graph( node_size, nx.DiGraph() )
+
+    # This graph G be used to be a framework of the neuronal network.
+    # I will use the attributes dictionary to simulate synaptic dynamics, while graph G remains still
+
 
     # Simulation
 
@@ -137,7 +139,7 @@ if __name__ == '__main__':
     neuros_list = []
 
 #    for i in tqdm( range( 1000 ), desc = 'Avalanche process...' ):
-    while Avalanche_done_count < 100:
+    while Avalanche_done_count < 1000:
         timescale += 1
         timescale_list.append( timescale )
 
@@ -149,7 +151,7 @@ if __name__ == '__main__':
         if avalanche_count:
             Avalanche_done_count += 1
             print( "Size : %d", avalanche_count )
-            print( 'Avalanche count = ', Avalanche_done_count, '/100' )
+            print( 'Avalanche count = ', Avalanche_done_count, '/1000' )
 
         Total_neuro = 0
         one_neuro = 0
