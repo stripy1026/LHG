@@ -55,7 +55,7 @@ def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
     avalanche_count = 0
     changed = True
-    cl = [False]*len( node_grid )
+    Avalanche_grid = Make_neuron_attributes_dict(0)
 
     while changed:
         changed = False
@@ -67,8 +67,8 @@ def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 #                print( round( node_grid[ key ], 2 ), end=' ' )
                 node_grid[ key ] -= 1
 
-                if cl[ key ] == False:
-                    cl[ key ] = True
+                if Avalanche_grid[ key ] == 0:
+                    Avalanche_grid[ key ] = 1
                     avalanche_count += 1
                
                 neighbor_count = len( G[key] )
@@ -106,7 +106,7 @@ if __name__ == '__main__':
 
     # Set Parameters
 
-    node_size = 300
+    node_size = 100
     alpha = 1.4
     v = 10
     fraction = 0.2
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     #==========================================================================
 
     # Plot graph
-    #G = nx.grid_2d_graph( 10, 10 )
+    #G = nx.grid_2d_graph( 10, 10, create_using=nx.DiGraph() )
     G = nx.complete_graph( node_size, nx.DiGraph() )
 
     # This graph G be used to be a framework of the neuronal network.
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     # Simulation
 
 
-    A = Make_neuron_attributes_dict(0.9)
+    A = Make_neuron_attributes_dict(0)
     B = Make_synapse_attributes_dict( alpha, fraction )
     C = Make_neuron_attributes_dict(0)
 
@@ -143,14 +143,14 @@ if __name__ == '__main__':
         timescale += 1
         timescale_list.append( timescale )
 
-        Injects_current_to_random( A, node_size, external_current )
+        Injects_current_to_random( A, 100, external_current )
 
         avalanche_count = Synaptic_dynamics( C, A, B, fraction )
         Avalanche_Datalist.append( avalanche_count )
 
         if avalanche_count:
             Avalanche_done_count += 1
-            print( "Size : %d", avalanche_count )
+            print( "Size : %d" %(avalanche_count) )
             print( 'Avalanche count = ', Avalanche_done_count, '/1000' )
 
         Total_neuro = 0
