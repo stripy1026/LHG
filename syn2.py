@@ -93,7 +93,7 @@ if __name__ == '__main__':
     v = 10
     fraction = 0.2
     external_current = 0.025
-    avalanche_cycle = 1000
+    avalanche_cycle = 100
 
     #==========================================================================
 
@@ -149,9 +149,10 @@ if __name__ == '__main__':
 
             # J term ends here.
 
-            avalanche_count += Synaptic_dynamics( C, A, B, fraction )
+            tmp_count = Synaptic_dynamics( C, A, B, fraction )
+            avalanche_count += tmp_count
 
-            if avalanche_count:
+            if tmp_count:
 
                 changed = True
 
