@@ -36,42 +36,48 @@ def Recover_neurotransmitter( alpha, fraction, v, node_size, connection_strength
 def Avalanche_update( node_list, link_list, temp_node_list, temp_link_list, node_size, fraction ):
 
     avalanche_check_list = []
+    changed = True
 
-    for i in range( node_size ):
+    while changed:
 
-        if node_list[i] > 1:
+        changed = False
 
-            node_list[i] -= 1
+        for i in range( node_size ):
 
-            if not i in avalanche_check_list:
+            if node_list[i] > 1:
 
-                avalanche_check_list.append( i )
+                node_list[i] -= 1
+                changed = True
 
-            neighbor_count = 0
+                if not i in avalanche_check_list:
 
-            for nc in range( node_size ):
+                    avalanche_check_list.append( i )
 
-                if link_list[i][nc]:
+                neighbor_count = 0
 
-                    neighbor_count += 1
+                for nc in range( node_size ):
+
+                    if link_list[i][nc]:
+
+                        neighbor_count += 1
+
+                for j in range( node_size ):
+
+                    if link_list[i][j]:
+
+                        temp_node_list[j] += (1/neighbor_count)*fraction*link_list[i][j]
+                        temp_link_list[i][j] -= fraction*link_list[i][j]
+
+
+        for i in range( node_size ):
+
+            node_list[i] += temp_node_list[i]
+            temp_node_list[i] = 0
 
             for j in range( node_size ):
 
-                if link_list[i][j]:
-
-                    temp_node_list[j] += (1/neighbor_count)*fraction*link_list[i][j]
-                    temp_link_list[i][j] -= fraction*link_list[i][j]
-
-
-    for i in range( node_size ):
-
-        node_list[i] += temp_node_list[i]
-        temp_node_list[i] = 0
-
-        for j in range( node_size ):
-
-            link_list[i][j] += temp_link_list[i][j]
-            temp_link_list[i][j] = 0
+                link_list[i][j] += temp_link_list[i][j]
+                temp_link_list[i][j] = 0
 
 
     avalanche_count = len( avalanche_check_list )
@@ -83,7 +89,7 @@ if __name__ == "__main__":
 
     # Set Parameters
 
-    node_size = 10
+    node_size = 300
     alpha = 1.4
     v = 10
     fraction = 0.2
@@ -152,11 +158,3 @@ if __name__ == "__main__":
     dataframe1 = pd.DataFrame( { 'AC' : Avalanche_Datalist, 'a' : alpha, 'N' : neuro_list, 'NS' : neuros_list } )
 
     dataframe1.to_csv( file_name + ".csv" )
-
-
-
-        
-
-
-
-
