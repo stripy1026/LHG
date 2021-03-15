@@ -6,11 +6,6 @@ import pandas as pd
 from tqdm import tqdm
 
 
-
-
-
-
-
 def Make_neuron_attributes_dict( init_value ):
 
     key = G.nodes
@@ -31,8 +26,6 @@ def Make_synapse_attributes_dict( alpha, fraction ):
     return edge_attributes_dictionary
 
 
-
-
 def Injects_current_to_2D_random( node_grid, size, amount ):
 
     i = random.randrange( 0, size )
@@ -48,46 +41,37 @@ def Injects_current_to_random( node_grid, size, amount ):
     node_grid[i] += amount
 
 
-
-
-
 def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
     avalanche_count = 0
-    changed = True
     Avalanche_grid = Make_neuron_attributes_dict(0)
 
-    while changed:
-        changed = False
+    for i, key in enumerate( node_grid ):
 
-        for i, key in enumerate( node_grid ):
+        if node_grid[ key ] > 1:
 
-            if node_grid[ key ] > 1:
-                changed = True
-#                print( round( node_grid[ key ], 2 ), end=' ' )
-                node_grid[ key ] -= 1
+            changed = True
+            node_grid[ key ] -= 1
 
-                if Avalanche_grid[ key ] == 0:
-                    Avalanche_grid[ key ] = 1
-                    avalanche_count += 1
+            if Avalanche_grid[ key ] == 0:
+
+                Avalanche_grid[ key ] = 1
+                avalanche_count += 1
                
-                neighbor_count = len( G[key] )
+            neighbor_count = len( G[key] )
 
-                for i, nbnode in enumerate( G[key] ):
+            for i, nbnode in enumerate( G[key] ):
 
-                    temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
-                    edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
+                temp_grid[nbnode] += (1/neighbor_count)*fraction*edge_grid[( key, nbnode )]
+                edge_grid[( key, nbnode )] -= fraction*edge_grid[( key, nbnode )]
 
-        for i, key in enumerate( node_grid ):
+    for i, key in enumerate( node_grid ):
 
-            node_grid[ key ] += temp_grid[ key ]
-            temp_grid[ key ] = 0
+        node_grid[ key ] += temp_grid[ key ]
+        temp_grid[ key ] = 0
 
 
     return avalanche_count
-
-
-
 
 
 def Recover_neurotransmitter( alpha, v, fraction, connection_strength, size ):
@@ -95,8 +79,6 @@ def Recover_neurotransmitter( alpha, v, fraction, connection_strength, size ):
     connection_strength += ( 1/(v*size) )*( (alpha/fraction) - connection_strength )
 
     return connection_strength
-
-
 
 
 if __name__ == '__main__':
@@ -111,6 +93,7 @@ if __name__ == '__main__':
     v = 10
     fraction = 0.2
     external_current = 0.025
+    avalanche_cycle = 1000
 
     #==========================================================================
 
@@ -129,7 +112,6 @@ if __name__ == '__main__':
     B = Make_synapse_attributes_dict( alpha, fraction )
     C = Make_neuron_attributes_dict(0)
 
-
     Avalanche_Datalist = []
     Avalanche_done_count = 0
 
@@ -138,35 +120,59 @@ if __name__ == '__main__':
     neuro_list = []
     neuros_list = []
 
-#    for i in tqdm( range( 1000 ), desc = 'Avalanche process...' ):
-    while Avalanche_done_count < 1000:
+    while Avalanche_done_count < avalanche_cycle:
+
         timescale += 1
         timescale_list.append( timescale )
+        avalanche_count = 0
+        changed = True
 
-        Injects_current_to_random( A, 100, external_current )
+        Injects_current_to_random( A, node_size, external_current )
 
-        avalanche_count = Synaptic_dynamics( C, A, B, fraction )
+        while changed:
+
+            changed = False
+
+            # J restoration term
+
+            Total_neuro = 0
+            one_neuro = 0
+
+            for i, key in enumerate( B ):
+
+                B[key] = Recover_neurotransmitter( alpha, v, fraction, B[key], node_size )
+                Total_neuro += B[key]
+
+                if i == 0:
+
+                    one_neuro += B[key]
+
+            # J term ends here.
+
+            avalanche_count += Synaptic_dynamics( C, A, B, fraction )
+
+            if avalanche_count:
+
+                changed = True
+
+        
         Avalanche_Datalist.append( avalanche_count )
 
         if avalanche_count:
+
             Avalanche_done_count += 1
             print( "Size : %d" %(avalanche_count) )
-            print( 'Avalanche count = ', Avalanche_done_count, '/1000' )
+            print( 'Avalanche count = ', Avalanche_done_count, '/', avalanche_cycle )
 
-        Total_neuro = 0
-        one_neuro = 0
+        div = 0
+
         for i, key in enumerate( B ):
 
-            B[key] = Recover_neurotransmitter( alpha, v, fraction, B[key], node_size )
-            Total_neuro += B[key]
-            if i == 0:
-                one_neuro += B[key]
+            div += 1
 
-        div = node_size*(node_size - 1)
         neuro_list.append( Total_neuro/div )
         neuros_list.append( one_neuro )
-
-        
+       
 
     print( '==== Please enter the simulation date ====' )
     Date = sys.stdin.readline().rstrip()
