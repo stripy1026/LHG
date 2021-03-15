@@ -44,7 +44,6 @@ def Injects_current_to_random( node_grid, size, amount ):
 def Synaptic_dynamics( temp_grid, node_grid, edge_grid, fraction ):
 
     avalanche_count = 0
-    Avalanche_grid = Make_neuron_attributes_dict(0)
 
     for i, key in enumerate( node_grid ):
 
@@ -125,6 +124,7 @@ if __name__ == '__main__':
         timescale += 1
         timescale_list.append( timescale )
         avalanche_count = 0
+        Avalanche_grid = Make_neuron_attributes_dict(0)
         changed = True
 
         Injects_current_to_random( A, node_size, external_current )
