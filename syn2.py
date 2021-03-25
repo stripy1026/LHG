@@ -88,11 +88,11 @@ if __name__ == '__main__':
     # Set Parameters
 
     node_size = 100
-    alpha = 1.4
+    alpha = 2.0
     v = 10
     fraction = 0.2
     external_current = 0.025
-    avalanche_cycle = 100
+    avalanche_cycle = 10000
 
     #==========================================================================
 
