@@ -1,2 +1,2 @@
 # LHG
-![flowchart1](./untitled Diagram.png)
+![flowchart1](./Untitled Diagram.png)
