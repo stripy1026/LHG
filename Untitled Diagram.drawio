@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-06-11T04:08:08.721Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36" etag="yv-ST1Q85WF0zzGtNUay" version="14.7.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-11T04:19:07.496Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36" etag="bDbLTgUnwbleq84o4LwZ" version="14.7.7" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
     <mxGraphModel dx="616" dy="1588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
       <root>
@@ -11,6 +11,9 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="320" y="130" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-56" target="iJBfr3rQNkbRWNF6JBHE-90">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-56" value="i &amp;gt; node_size" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="260" y="130" width="120" height="80" as="geometry" />
@@ -30,6 +33,13 @@
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-60" value="potential &amp;gt; 1" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="262.5" y="260" width="115" height="70" as="geometry" />
         </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-61" target="iJBfr3rQNkbRWNF6JBHE-56">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="185" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-61" value="i++" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="150" y="280" width="70" height="30" as="geometry" />
         </mxCell>
@@ -39,17 +49,13 @@
             <mxPoint x="410" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iJBfr3rQNkbRWNF6JBHE-66" value="" style="curved=1;endArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-61" target="iJBfr3rQNkbRWNF6JBHE-56">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="360" y="380" as="sourcePoint" />
-            <mxPoint x="260" y="180" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="185" y="170" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-67" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="222.5" y="270" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-68">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="480" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-68" value="potential -= 1&lt;br&gt;avalanche_count++" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="260" y="370" width="120" height="60" as="geometry" />
@@ -65,6 +71,52 @@
         </mxCell>
         <mxCell id="iJBfr3rQNkbRWNF6JBHE-71" value="&lt;h1&gt;Function Synaptic_dynamics&lt;/h1&gt;&lt;p&gt;This function works critical part of the program, which makes avalanche(deliver current to neighbor neurons).&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="420" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-72" target="iJBfr3rQNkbRWNF6JBHE-77">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-72" target="iJBfr3rQNkbRWNF6JBHE-61">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-72" value="j &amp;gt; neighbor_count" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="480" width="162.5" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-75" value="j = 0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="450" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-77" target="iJBfr3rQNkbRWNF6JBHE-87">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="548" y="620" />
+              <mxPoint x="548" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-77" value="neighbor_node += (1/neighbor_count) * fraction * neurotransmitter&lt;br&gt;neurotransmitter -= fraction * neurotransmitter&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="114.69" y="600" width="413.12" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-80" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="570" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-84" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="500" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-89" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-87" target="iJBfr3rQNkbRWNF6JBHE-72">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-87" value="j++" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="457.81" y="505" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iJBfr3rQNkbRWNF6JBHE-90" target="iJBfr3rQNkbRWNF6JBHE-92">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-90" value="return avalanche_count" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="432.81" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iJBfr3rQNkbRWNF6JBHE-92" value="end" style="shape=mxgraph.flowchart.terminator;strokeWidth=2;gradientColor=none;gradientDirection=north;fontStyle=0;html=1;" vertex="1" parent="1">
+          <mxGeometry x="432.81" y="360" width="120" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
